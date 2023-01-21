@@ -1,0 +1,33 @@
+{
+  "name": "@edugis/proj-convert",
+  "version": "0.1.0",
+  "description": "Projects geojson from any epsg-defined projection to any other defined epsg-defined projection",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edugis-repo/geojson-project.git"
+  },
+  "keywords": [
+    "geojson",
+    "project",
+    "proj4",
+    "projection",
+    "transform",
+    "crs",
+    "epsg"
+  ],
+  "author": "Anne Blankert, EduGIS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edugis-repo/geojson-project/issues"
+  },
+  "homepage": "https://github.com/edugis-repo/geojson-project#readme",
+  "dependencies": {
+    "geojson-project": "^2.0.1",
+    "proj4": "^2.8.1"
+  }
+}
