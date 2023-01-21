@@ -53,7 +53,10 @@ export const geoJSONProject = (geojson, fromEPSG, toEPSG) => {
 }
 
 export const coordProject = (coord, fromEPSG, toEPSG) => {
-    return proj4(fromEPSG, toEPSG).forward(coord);
+    if (fromEPSG && toEPSG && proj4.defs(fromEPSG) && proj4.defs(toEPSG)) {
+        return proj4(fromEPSG, toEPSG).forward(coord);
+    }
+    return undefined;
 }
 
 export default geoJSONProject;
