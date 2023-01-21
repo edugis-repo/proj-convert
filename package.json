@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/edugis-repo/proj-convert#readme",
   "dependencies": {
-    "geojson-project": "^2.0.1",
     "proj4": "^2.8.1"
   }
 }
