@@ -39,6 +39,29 @@ const crsGeoJSON = {
 const projectedCrsGeoJSON = geoJSONProject(crsGeoJSON);
 console.log(JSON.stringify(projectedCrsGeoJSON, null, 2));
 
+const epsgGeoJSON = {
+    "type": "FeatureCollection",
+    "crs": {
+        "type": "EPSG",
+        "properties":{
+            "code": 28992
+        },
+    },
+    "features": [{
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [155000, 463000] // Amersfoort
+        },
+        "properties": {
+            id: 1
+        }
+    }]
+}
+const projectedEpsgGeoJSON = geoJSONProject(epsgGeoJSON);
+console.log(JSON.stringify(projectedEpsgGeoJSON, null, 2));
+
+
 const coordinate = [5.387203508863084, 52.15517229965292];
 const projectedCoordinate = coordProject(coordinate, 'EPSG:4326', 'EPSG:28992');
 console.log(projectedCoordinate);
