@@ -7,17 +7,21 @@ proj4.defs(epsgDefs);
 
 const parseCRS = (geojson) => {
     let result = 'EPSG:4326'; // GeoJSON default
-    if (geojson && geojson.crs && geojson.crs.properties && geojson.crs.properties.name) {
-        const crsName = geojson.crs.properties.name;
-        if (crsName.startsWith('urn:ogc:def:crs:')) {
-            const crsNameParts = crsName.split(':');
-            if (crsNameParts[4] === 'OGC' && crsNameParts[5] === 'CRS84') {
-                fromEPSG = 'EPSG:4326';
-            } else if (crsNameParts[4] === 'EPSG') {
-                result = 'EPSG:' + crsNameParts[crsNameParts.length - 1];
+    if (geojson && geojson.crs && geojson.crs.type && geojson.crs.properties) {
+        if (geojson.crs.properties.name) {
+            const crsName = geojson.crs.properties.name;
+            if (crsName.startsWith('urn:ogc:def:crs:')) {
+                const crsNameParts = crsName.split(':');
+                if (crsNameParts[4] === 'OGC' && crsNameParts[5] === 'CRS84') {
+                    fromEPSG = 'EPSG:4326';
+                } else if (crsNameParts[4] === 'EPSG') {
+                    result = 'EPSG:' + crsNameParts[crsNameParts.length - 1];
+                }
+            } else if (crsName.startsWith('EPSG:')) {
+                result = crsName;
             }
-        } else if (crsName.startsWith('EPSG:')) {
-            result = crsName;
+        } else if (geojson.crs.type==='EPSG' && geojson.crs.properties.code) {
+            result = `EPSG:${geojson.crs.properties.code}`
         }
     }
     return result;
