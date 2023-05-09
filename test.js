@@ -65,3 +65,5 @@ console.log(JSON.stringify(projectedEpsgGeoJSON, null, 2));
 const coordinate = [5.387203508863084, 52.15517229965292];
 const projectedCoordinate = coordProject(coordinate, 'EPSG:4326', 'EPSG:28992');
 console.log(projectedCoordinate);
+
+console.log(coordProject(coordinate, 'EPSG:4326'));
