@@ -5,6 +5,8 @@ import defs from './proj4defs.js';
 const epsgDefs = defs.map(def=>[`EPSG:${def[0]}`, def[1]]).filter(def=>def[1] !== "");
 proj4.defs(epsgDefs);
 
+const defaultToEPSG='EPSG:4326'
+
 const parseCRS = (geojson) => {
     let result = 'EPSG:4326'; // GeoJSON default
     if (geojson && geojson.crs && geojson.crs.type && geojson.crs.properties) {
@@ -27,12 +29,9 @@ const parseCRS = (geojson) => {
     return result;
 }
 
-export const geoJSONProject = (geojson, fromEPSG, toEPSG) => {
+export const geoJSONProject = (geojson, fromEPSG, toEPSG = defaultToEPSG) => {
     if (!fromEPSG) {
         fromEPSG = parseCRS(geojson);
-    }
-    if (!toEPSG) {
-        toEPSG = 'EPSG:4326';
     }
     if (geojson && fromEPSG && toEPSG) {
         if (fromEPSG === toEPSG) {
@@ -56,8 +55,8 @@ export const geoJSONProject = (geojson, fromEPSG, toEPSG) => {
     return null;
 }
 
-export const coordProject = (coord, fromEPSG, toEPSG) => {
-    if (fromEPSG && toEPSG && proj4.defs(fromEPSG) && proj4.defs(toEPSG)) {
+export const coordProject = (coord, fromEPSG, toEPSG = defaultToEPSG) => {
+    if (fromEPSG && proj4.defs(fromEPSG) && proj4.defs(toEPSG)) {
         return proj4(fromEPSG, toEPSG).forward(coord);
     }
     return undefined;
